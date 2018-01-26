@@ -1,0 +1,21 @@
+{
+    "name": "degagne/filesystem",
+    "type": "library",
+    "description": "PHP filesystem library",
+    "keywords": ["php"],
+    "homepage": "https://github.com/degagne/filesystem",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Deric Degagne",
+            "email": "deric.degagne@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+		"symfony/process" : "^2.8"
+    },
+    "autoload": {
+        "psr-4": { "Filesystem\\": "lib/" }
+    }
+}
