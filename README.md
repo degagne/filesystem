@@ -1,3 +1,4 @@
+
 Filesystem
 ==========
 
@@ -25,26 +26,204 @@ or run
 
 Usage
 =====
+## Filesystem Class
 
+Include the Filesystem class to script.
 ```php
 require_once(__DIR__ . "/vendor/autoload.php");
 
-use Filesystem\Archive;
-
-// Return zip command with all options and arguments
-$archive = new Archive("test.zip");
-$zip = $archive
-    ->add_files(["testfile1.txt", "testfile2.txt"])
-    ->zip(["-j","-9"], true);
-
-print("{$zip}\n");
-
------ Expected Result(s) -----
-zip -j -9 test.zip testfile1.txt testfile2.txt
-
-// Run zip command directly
-$zip = $archive
-    ->add_files(["testfile1.txt", "testfile2.txt"])
-    ->zip(["-j","-9"], true)
-    ->run();
+use Filesystem\Filesystem;
 ```
+
+### chmod
+----------
+
+Changes file mode.
+
+#### Description
+```php
+bool chmod (string $path, int $mode [, bool $recursive = false])
+```
+
+#### Example
+```php
+<?php
+
+use Filesystem\Filesystem;
+
+Filesystem::chmod('/path/to/file', 0700, true);
+```
+#### Parameters
+
+**path**
+File or path name.
+
+**mode**
+File mode.
+
+**recursive**
+Recursive.
+
+### chgrp
+----------
+
+Changes file group.
+
+#### Description
+```php
+bool chgrp(string $file, int $group [, bool $recursive = false])
+```
+
+#### Example
+```php
+<?php
+
+use Filesystem\Filesystem;
+
+Filesystem::chgrp('/path/to/file', 100);
+```
+
+#### Parameters
+
+**file**
+File or path name.
+
+**group**
+Group ID.
+
+**recursive**
+Recursive.
+
+### copy
+----------
+Copy file.
+
+#### Description
+```php
+bool copy(string $srcfile, string $destfile)
+```
+#### Example
+```php
+<?php
+
+use Filesystem\Filesystem;
+
+Filesystem::copy('/path/to/source/file', '/path/to/dest/file');
+```
+#### Parameters
+
+**srcfile**
+Source file.
+
+**destfile**
+Destination file.
+
+### delete
+------
+Deletes file.
+
+#### Description
+```php
+bool delete(string $file [, bool $strict = true])
+```
+
+#### Example
+```php
+<?php
+
+use Filesystem\Filesystem;
+
+Filesystem::delete('/path/to/file');
+```
+
+#### Parameters
+
+**file**
+Path to file.
+
+**strict**
+Engage strict error checking. If true, an exception will be thrown on error.
+
+### deleteFiles
+----------
+Deletes multiple files.
+
+#### Description
+```php
+bool deleteFiles(array $files [, bool $strict = true])
+```
+
+#### Example
+```php
+<?php
+
+use Filesystem\Filesystem;
+
+Filesystem::deleteFiles(['/path/to/file1', '/path/to/file2']);
+```
+
+#### Parameters
+**files**
+Path to files.
+
+**strict**
+Engage strict error checking. If true, an exception will be thrown on error.
+
+### glob
+----------
+Returns path names matching a pattern.
+
+#### Description
+```php
+mixed glob(string $directory [, mixed $pattern = null])
+```
+
+#### Examples
+```php
+<?php
+
+use Filesystem\Filesystem;
+
+$matches = Filesystem::glob('/path/to/directory', '*.php');
+```
+
+#### Parameters
+
+**directory**
+Path to directory.
+
+**pattern**
+Matching pattern.
+
+### mkdir
+----------
+Make directory.
+
+#### Description
+```php
+bool mkdir(string $directory [, int $mode = 0777, bool $recursive = false, bool $strict = true])
+```
+
+#### Example
+```php
+<?php
+
+use Filesystem\Filesystem;
+
+Filesystem::mkdir('/path/to/directory', 0600, true);
+```
+
+#### Parameters
+
+**directory**
+Path to directory.
+
+**mode**
+File mode.
+
+**recursive**
+Recursive.
+
+**strict**
+Engage strict error checking. If true, an exception will be thrown on error.
+
