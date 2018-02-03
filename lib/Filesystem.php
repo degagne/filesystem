@@ -225,6 +225,50 @@ class Filesystem
         return true;
     }
     
+    /*
+     * Write content to file.
+     *
+     * @param  string $filename file name
+     * @param  string $content  content
+     * @param  bool   $append   append to file
+     * @return void
+     */
+    final public static function fileWrite($filename, $content, $append = false)
+    {
+        if ($append !== false)
+        {
+            @file_put_contents($filename, $content, FILE_APPEND | LOCK_EX);
+        }
+        else
+        {
+            @file_put_contents($filename, $content);
+        }
+        
+        $filesize = @filesize($filename);
+        if ($filesize === false || $filesize == 0)
+        {
+            throw new \RuntimeException(__METHOD__ . ": failed to write contents to file: {$filename}");
+        }
+        return;
+    }
+    
+    /*
+     * Return file content.
+     *
+     * @param  string $filename file name
+     * @return string
+     */
+    final public static function fileContent($filename)
+    {
+        $content = @file_get_contents($filename);
+
+        if (empty($content) || $content === false)
+        {
+            throw new \RuntimeException(__METHOD__ . ": failed to retrieve contents of file: {$filename}");
+        }
+        return $content;
+    }
+    
     /**
      * Create temporary file.
      *
