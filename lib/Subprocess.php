@@ -59,7 +59,7 @@ class Subprocess
     final public function run($cmd, $stream = self::STREAM_STDOUT_WAIT, $fail_on_error = false, $stdoutfile = null, $stderrfile = null)
     {
         $process = new Process($cmd);
-        $process->setTimeout(3600);
+        $process->setTimeout(10800);
         $process->setIdleTimeout(3600);
 
         switch ($stream)
