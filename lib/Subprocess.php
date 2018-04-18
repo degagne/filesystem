@@ -60,7 +60,7 @@ class Subprocess
     {
         $process = new Process($cmd);
         $process->setTimeout(10800);
-        $process->setIdleTimeout(3600);
+        $process->setIdleTimeout(10800);
 
         switch ($stream)
         {
